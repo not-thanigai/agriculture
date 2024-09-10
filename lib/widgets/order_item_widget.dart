@@ -41,7 +41,7 @@ class OrderItemWidget extends StatelessWidget {
                 ),
                 const SizedBox(width: 5),
                 Text(
-                  '\$${totalPrice.toStringAsFixed(2)}',
+                  '\₹${totalPrice.toStringAsFixed(2)}',
                   style: theme.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: theme.colorScheme.primary,

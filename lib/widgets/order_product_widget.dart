@@ -68,7 +68,7 @@ class OrderProductWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "\$${product.price}",
+                      "₹${product.price}",
                       style: TextStyle(
                         color: theme.colorScheme.primary,
                         fontWeight: FontWeight.bold,

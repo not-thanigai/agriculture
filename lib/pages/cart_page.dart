@@ -28,7 +28,7 @@ class CartPage extends StatelessWidget {
             children: [
               Text("Total: (${cartItems.length})"),
               Text(
-                "\$$totalPrice",
+                "₹$totalPrice",
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).colorScheme.primary),

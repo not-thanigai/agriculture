@@ -1,5 +1,6 @@
 import 'package:agriculture/data/product.dart';
 import 'package:agriculture/models/product.dart';
+import 'package:agriculture/pages/farmer_info_page.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -71,6 +72,31 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 4.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            FarmerInfo(product: widget.product), // implement farmer model then push it
+
+                      ),
+                    );
+                  },
+                  child: Text(
+                    "by ${widget.product.farmer}",
+                    // style: Theme.of(context).textTheme.bodyMedium,
+                    style: const TextStyle(color: Colors.blue, fontStyle: FontStyle.italic, decoration: TextDecoration.underline),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
               Text(
                 "Available in stock",
                 style: TextStyle(
@@ -81,7 +107,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "\$${widget.product.price}",
+                      text: "₹${widget.product.price}",
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     TextSpan(
@@ -151,15 +177,15 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 TextSpan(
                   text: showingMore
                       ? widget.product.description
-                      : '${widget.product.description.substring(0, widget.product.description.length - 100)}...',
+                      : widget.product.description.substring(0, widget.product.description.length ),
                 ),
-                TextSpan(
-                  recognizer: readMoreGestureRecognizer,
-                  text: showingMore ? " Read less" : " Read more",
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
-                ),
+                // TextSpan(
+                //   recognizer: readMoreGestureRecognizer,
+                //   text: showingMore ? " Read less" : " Read more",
+                //   style: TextStyle
+                //     color: Theme.of(context).colorScheme.primary,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -167,7 +193,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             height: 10,
           ),
           Text(
-            "Relate Product",
+            "Related Products",
             style: Theme.of(context)
                 .textTheme
                 .titleMedium

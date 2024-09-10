@@ -1,7 +1,9 @@
 import 'package:agriculture/pages/cart_page.dart';
 import 'package:agriculture/pages/explore_page.dart';
+import 'package:agriculture/pages/products_view.dart';
 import 'package:agriculture/pages/profile_page.dart';
 import 'package:agriculture/pages/service_page.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:badges/badges.dart' as badges;
@@ -14,10 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
+
   final pages = [
     const ExplorePage(),
-    const ServicePage(),
-    const CartPage(),
+    // const ServicePage(),
+    const ProductsView()
+,    const CartPage(),
     const ProfilePage(),
   ];
   int currentIndex = 0;
@@ -25,21 +30,15 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const Drawer(),
+      // drawer: Image.asset('farmhouse.png'),
       appBar: AppBar(
+        leading: Image.asset('assets/farmhouse.png'),
         centerTitle: false,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Hi Mach 👋",
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-            Text(
-              "Enjoy our services",
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-          ],
+        title: Text(
+          "Farmly",
+          style: Theme.of(context).textTheme.headlineSmall,
+          textAlign: TextAlign.left,
+          
         ),
         actions: [
           Padding(
@@ -63,37 +62,60 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: pages[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(IconlyLight.home),
-            activeIcon: Icon(IconlyBold.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconlyLight.call),
-            activeIcon: Icon(IconlyBold.call),
-            label: 'Service',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconlyLight.buy),
-            activeIcon: Icon(IconlyBold.buy),
-            label: 'Cart',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(IconlyLight.profile),
-            activeIcon: Icon(IconlyBold.profile),
-            label: 'Profile',
-          ),
-        ],
-      ),
+      
+      bottomNavigationBar: 
+      CurvedNavigationBar(
+          key: _bottomNavigationKey,
+          index: currentIndex,
+          items: const <Widget>[
+            Icon(Icons.home, size: 30),
+            Icon(IconlyLight.bag, size: 30),
+            Icon(IconlyBold.buy, size: 30),
+            Icon(IconlyBold.profile, size: 30),
+          ],
+          color: Colors.green,
+          buttonBackgroundColor: Colors.green[200]!,
+          backgroundColor: Colors.white,
+          animationCurve: Curves.easeInOut,
+          animationDuration:const  Duration(milliseconds: 600),
+          onTap: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+          letIndexChange: (index) => true,
+        ),
+      // BottomNavigationBar(
+      //   currentIndex: currentIndex,
+      //   onTap: (index) {
+      //     setState(() {
+      //       currentIndex = index;
+      //     });
+      //   },
+      //   type: BottomNavigationBarType.fixed,
+      //   items: const [
+      //     BottomNavigationBarItem(
+      //       icon: Icon(IconlyLight.home),
+      //       activeIcon: Icon(IconlyBold.home),
+      //       label: 'Home',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(IconlyLight.call),
+      //       activeIcon: Icon(IconlyBold.call),
+      //       label: 'Service',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(IconlyLight.buy),
+      //       activeIcon: Icon(IconlyBold.buy),
+      //       label: 'Cart',
+      //     ),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(IconlyLight.profile),
+      //       activeIcon: Icon(IconlyBold.profile),
+      //       label: 'Profile',
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

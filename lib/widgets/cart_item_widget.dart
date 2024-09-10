@@ -80,7 +80,7 @@ class CartItemWidget extends StatelessWidget {
         return await completer.future;
       },
       child: SizedBox(
-        height: 125,
+        height: 135,
         child: Card(
           clipBehavior: Clip.antiAlias,
           elevation: 1,
@@ -132,7 +132,7 @@ class CartItemWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            "\$${cartItem.price}",
+                            "₹${cartItem.price}",
                             style: Theme.of(context)
                                 .textTheme
                                 .titleMedium

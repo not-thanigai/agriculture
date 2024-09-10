@@ -1,5 +1,6 @@
 class Product {
   final String name;
+  final String farmer;
   final String description;
   final String image;
   final double price;
@@ -8,6 +9,7 @@ class Product {
 
   Product({
     required this.name,
+    required this.farmer,
     required this.description,
     required this.image,
     required this.price,
